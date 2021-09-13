@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BookingRoomAPI</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:BookingRoomAPI.Controllers.BookingController.CheckAvailable(System.DateTime,System.DateTime)" -->
+        <member name="M:BookingRoomAPI.Controllers.BookingController.GetByCode(System.String)">
+            <summary>
+            Search for booking by code
+            </summary>
+            <remarks>
+            Sample request:
+            
+                HttpGet /booking/GetByCode
+                    {URL}/code?code=ABC123
+                
+            </remarks>
+            <param name="code">Booking code</param>
+            <returns>Booking</returns>
+            <response code="200">Returns Booking</response>
+            <response code="422">Returns error</response> 
+            <response code="500">Returns Internal Server error</response> 
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BookingRoomAPI.Controllers.BookingController.GetListBookings(System.DateTime,System.DateTime)" -->
+        <member name="M:BookingRoomAPI.Controllers.BookingController.Create(BookingRoomAPI.Application.Dtos.Booking.CreateBookingInputDto)">
+            <summary>
+            Booking a Room
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST /booking/Create
+                {
+                    "CheckIn": "2021-09-01",
+                    "CheckOut": "2021-09-02",
+                    "FullName": "Fabricio Marcondes",
+                    "Email": "fabricio.marcondes@email.ca"
+                }
+                
+            </remarks>
+            <param name="dto"></param>
+            <returns>Created Booking</returns>
+            <response code="200">Success</response>
+            <response code="201">Returns Created Booking</response>
+            <response code="422">Returns error</response> 
+            <response code="500">Returns Internal Server error</response> 
+        </member>
+        <member name="M:BookingRoomAPI.Controllers.BookingController.Update(BookingRoomAPI.Application.Dtos.Booking.UpdateBookingInputDto)">
+            <summary>
+            Update an existing booking
+            </summary>
+            <remarks>
+            Sample request:
+            
+                PUT /booking/Update
+                {
+                    "code": "ABC123",
+                    "CheckIn": "2021-09-01",
+                    "CheckOut": "2021-09-02"
+                }
+                
+            </remarks>
+            <param name="dto"></param>
+            <returns>Updated Booking</returns>
+            <response code="200">Returns booking</response>
+            <response code="422">Returns error</response> 
+            <response code="500">Returns Internal Server error</response> 
+        </member>
+        <member name="M:BookingRoomAPI.Controllers.BookingController.Cancel(System.String)">
+            <summary>
+            Cancel booking using code
+            </summary>
+            <remarks>
+            Sample request:
+            
+                HttpPatch /booking/Cancel
+                    {URL}/code?code=ABC123
+                
+            </remarks>
+            <param name="code">Booking code</param>
+            <returns>True or False if a booking was canceled or not</returns>
+            <response code="200">Returns boolean</response>
+            <response code="422">Returns error</response> 
+            <response code="500">Returns Internal Server error</response> 
+        </member>
+    </members>
+</doc>
