@@ -9,6 +9,7 @@
   <a href="#-usage">Usage</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-bussines-rules">Bussines Rules</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-contributing">Contributing</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-license">License</a>&nbsp;&nbsp;&nbsp;
 </p>
 
 <br>
@@ -37,10 +38,10 @@ API developed to booking a room.
 The project can be tested using the Swagger already added to the project.  
 
 ## Bussines Rules
-> 1. All reservations start at least the next day of booking;
-> 2. The stay can’t be longer than 3 days;
-> 3. It can’t be reserved more than 30 days in advance;
-> 4. To simplify, the API is insecure.
+- 1. All reservations start at least the next day of booking;
+- 2. The stay can’t be longer than 3 days;
+- 3. It can’t be reserved more than 30 days in advance;
+- 4. To simplify, the API is insecure.
 
 
 ## 🤔 Contributing
