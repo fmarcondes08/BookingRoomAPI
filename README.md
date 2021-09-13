@@ -29,6 +29,9 @@ The project can be tested using the Swagger already added to the project.
 - It can’t be reserved more than 30 days in advance;
 - To simplify, the API is insecure.
 
+## References
+- <a href="https://sloboda-studio.com/blog/how-to-create-a-hotel-booking-website/">Understand how to create a Hotel Booking</a>
+- <a href="https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx">Entity Framework Core Tutorial</a>
 
 ## 🤔 Contributing
 
