@@ -1,8 +1,4 @@
-<h4 align="center">
-  Booking Room API
-</h4>
-
-<br>
+# Booking Room API
 
 ## 💻 Project
 API developed to booking a room.
