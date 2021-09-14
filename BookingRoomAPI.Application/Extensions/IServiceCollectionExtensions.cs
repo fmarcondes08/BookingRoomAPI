@@ -21,7 +21,8 @@ namespace BookingRoomAPI.Application.Extensions
             // Configure DbContext with Scoped lifetime   
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("Default"))
+                options.UseSqlServer(configuration.GetConnectionString("Default"),
+                    x => x.MigrationsAssembly("BookingRoomAPI"))
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             }, ServiceLifetime.Transient
             );
