@@ -18,14 +18,14 @@ API developed to booking a room.
   1. Set up the ***BookingRoomAPI*** as Startup Project.
   2. Run the project.
 
--SQL Server
-1. In ***IServiceCollectionExtensions***, comment or remove the InMemory configuration and uncomment SQL Server configuration
-2. In ***Startup*** file, remove or comment the lines inside ***Room Test InMemory Data*** region, in ***Configure*** method
-3. Update ***appsettings*** file and set up the SQL Server ConnectionString;
-4. In the ***Package Manager Console***, set up the ***Defaul Project*** to ***BookingRoomAPI.Infrastructure***
-5. In the ***Package Manager Console***, run Migration to create the database. ```update-database```
-6. Set up the ***BookingRoomAPI*** as Startup Project.
-7. Run the project.
+- SQL Server
+  1. In ***IServiceCollectionExtensions***, comment or remove the InMemory configuration and uncomment SQL Server configuration
+  2. In ***Startup*** file, remove or comment the lines inside ***Room Test InMemory Data*** region, in ***Configure*** method
+  3. Update ***appsettings*** file and set up the SQL Server ConnectionString;
+  4. In the ***Package Manager Console***, set up the ***Defaul Project*** to ***BookingRoomAPI.Infrastructure***
+  5. In the ***Package Manager Console***, run Migration to create the database. ```update-database```
+  6. Set up the ***BookingRoomAPI*** as Startup Project.
+  7. Run the project.
 
 ## Usage
 The project can be tested using the Swagger already added to the project.  
