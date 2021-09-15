@@ -19,12 +19,15 @@ namespace BookingRoomAPI.Application.Extensions
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             // Configure DbContext with Scoped lifetime
+            #region InMemory
             // InMemory
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseInMemoryDatabase("Booking");
             }, ServiceLifetime.Transient);
+            #endregion
 
+            #region SQL Server
             //SQL Server
             //services.AddDbContext<AppDbContext>(options =>
             //{
@@ -35,6 +38,7 @@ namespace BookingRoomAPI.Application.Extensions
             //);
 
             //services.AddScoped<Func<AppDbContext>>((provider) => () => provider.GetService<AppDbContext>());
+            #endregion
 
             return services;
         }
