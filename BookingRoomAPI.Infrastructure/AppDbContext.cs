@@ -14,10 +14,7 @@ namespace BookingRoomAPI.Infrastructure
         public AppDbContext(DbContextOptions<AppDbContext> options)
            : base(options)
         {
-            if (Database.GetPendingMigrations().Any())
-            {
-                Database.Migrate();
-            }
+
         }
 
         public DbSet<User> Users { get; set; }

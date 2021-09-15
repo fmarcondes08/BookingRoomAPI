@@ -9,6 +9,10 @@ using System.IO;
 using System.Reflection;
 using BookingRoomAPI.Application.Extensions;
 using BookingRoomAPI.Application.Mappers;
+using BookingRoomAPI.Infrastructure;
+using BookingRoomAPI.Domain.Models;
+using BookingRoomAPI.Domain.Models.Enums;
+using BookingRoomAPI.Domain.Interfaces;
 
 namespace BookingRoomAPI
 {
@@ -62,8 +66,25 @@ namespace BookingRoomAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRoomRepository repository)
         {
+            #region Room Test InMemory Data
+            var room = new Room
+            {
+                Id = new Guid("a58e6fd0-b5a5-4677-bba2-ed57acbed9f8"),
+                Active = true,
+                Created_At = new DateTime(2021, 9, 13, 12, 5, 40, 870, DateTimeKind.Local).AddTicks(1636),
+                Deleted_At = null,
+                Description = "Room for Rent",
+                Number = 1,
+                Type = RoomType.Standard,
+                Updated_At = new DateTime(2021, 9, 13, 12, 5, 40, 871, DateTimeKind.Local).AddTicks(2762)
+            };
+
+            repository.Add(room);
+
+            #endregion
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

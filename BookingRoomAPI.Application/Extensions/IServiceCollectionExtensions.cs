@@ -18,16 +18,23 @@ namespace BookingRoomAPI.Application.Extensions
     {
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            // Configure DbContext with Scoped lifetime   
+            // Configure DbContext with Scoped lifetime
+            // InMemory
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("Default"),
-                    x => x.MigrationsAssembly("BookingRoomAPI"))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            }, ServiceLifetime.Transient
-            );
+                options.UseInMemoryDatabase("Booking");
+            }, ServiceLifetime.Transient);
 
-            services.AddScoped<Func<AppDbContext>>((provider) => () => provider.GetService<AppDbContext>());
+            //SQL Server
+            //services.AddDbContext<AppDbContext>(options =>
+            //{
+            //    options.UseSqlServer(configuration.GetConnectionString("Default"),
+            //        x => x.MigrationsAssembly("BookingRoomAPI"))
+            //    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            //}, ServiceLifetime.Transient
+            //);
+
+            //services.AddScoped<Func<AppDbContext>>((provider) => () => provider.GetService<AppDbContext>());
 
             return services;
         }
