@@ -32,7 +32,7 @@ namespace BookingRoomAPI.Application.Extensions
             //services.AddDbContext<AppDbContext>(options =>
             //{
             //    options.UseSqlServer(configuration.GetConnectionString("Default"),
-            //        x => x.MigrationsAssembly("BookingRoomAPI"))
+            //        x => x.MigrationsAssembly("BookingRoomAPI.Infrastructure"))
             //    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             //}, ServiceLifetime.Transient
             //);

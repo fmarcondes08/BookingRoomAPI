@@ -51,13 +51,22 @@ namespace BookingRoomAPI.Application.Service.Services
             if (!Utils.VerifyDateRange(bookingInputDto.CheckIn, bookingInputDto.CheckOut)) throw new ValidateExceptions("Invalid Range of Date");
 
             var booking = _mapper.Map<Booking>(bookingInputDto);
-            booking.User = _mapper.Map<User>(bookingInputDto);
+            var userDto = _mapper.Map<User>(bookingInputDto);
 
             var room = await _roomRepository.GetAvailableRoom(bookingInputDto.CheckIn, bookingInputDto.CheckOut);
             var user = await _userRepository.GetByEmail(bookingInputDto.Email);
 
             booking.RoomId = room.Id;
-            booking.User = user == null ? booking.User : user;
+
+            if (user == null)
+            {
+                booking.User = userDto;
+            }
+            else
+            {
+                booking.UserId = user.Id;
+            }
+
             booking.Status = BookingStatus.Booked;
             booking.CheckIn = bookingInputDto.CheckIn.Date;
             booking.CheckOut = bookingInputDto.CheckOut.Date.AddDays(1).AddSeconds(-1);
@@ -66,6 +75,7 @@ namespace BookingRoomAPI.Application.Service.Services
             booking = await _bookingRepository.Add(booking);
 
             booking.Room = room;
+            booking.User = user == null ? booking.User : user;
 
             return _mapper.Map<BookingOutputDto>(booking);
         }

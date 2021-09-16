@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingRoomAPI.Domain.Models
 {
+    [Table("Rooms")]
     public class Room : EntityBase
     {
         public int Number { get; set; }

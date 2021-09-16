@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingRoomAPI.Domain.Models
 {
+    [Table("Bookings")]
     public class Booking : EntityBase
     {
-        public User User { get; set; }
         public Guid UserId { get; set; }
-        public Room Room { get; set; }
+        public User User { get; set; }
         public Guid RoomId { get; set; }
+        public Room Room { get; set; }
         public string Code { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }

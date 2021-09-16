@@ -13,21 +13,21 @@ namespace BookingRoomAPI.Infrastructure.Mappings
 
             builder.ToTable("Users");
 
-            builder.Property(p => p.FullName)
+            builder.Property(u => u.FullName)
                 .HasColumnType("nvarchar(max)")
                 .IsRequired();
 
-            builder.Property(p => p.Email)
+            builder.Property(u => u.Email)
                 .HasColumnType("nvarchar(100)")
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.HasMany(p => p.Bookings)
+            builder.HasMany(u => u.Bookings)
                 .WithOne(b => b.User)
                 .HasForeignKey(fk => fk.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasIndex(p => p.Email)
+            builder.HasIndex(u => u.Email)
                 .IsUnique();
         }
     }
