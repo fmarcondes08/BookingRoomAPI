@@ -9,7 +9,6 @@ using System.IO;
 using System.Reflection;
 using BookingRoomAPI.Application.Extensions;
 using BookingRoomAPI.Application.Mappers;
-using BookingRoomAPI.Infrastructure;
 using BookingRoomAPI.Domain.Models;
 using BookingRoomAPI.Domain.Models.Enums;
 using BookingRoomAPI.Domain.Interfaces;

@@ -4,10 +4,8 @@ using BookingRoomAPI.Application.Service.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace BookingRoomAPI.Controllers
@@ -31,7 +29,7 @@ namespace BookingRoomAPI.Controllers
         /// Sample request:
         /// 
         ///     HttpGet /booking/CheckAvailable
-        ///         {URL}/CheckAvailable?firstDay=2021-09-01&lastDay=2021-09-03
+        ///         {URL}/CheckAvailable?firstDay=2021-09-01&amp;lastDay=2021-09-03
         ///     
         /// </remarks>
         /// <param name="firstDay">First Date</param>
@@ -116,7 +114,7 @@ namespace BookingRoomAPI.Controllers
         /// Sample request:
         /// 
         ///     HttpGet /booking/GetListBookings
-        ///         {URL}/GetListBookings?firstDay=2021-09-01&lastDay=2021-09-03
+        ///         {URL}/GetListBookings?firstDay=2021-09-01&amp;lastDay=2021-09-03
         ///     
         /// </remarks>
         /// <param name="firstDay">First date</param>

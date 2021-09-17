@@ -7,7 +7,6 @@ using BookingRoomAPI.Domain.Models;
 using BookingRoomAPI.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using BookingRoomAPI.Application.Exceptions;
 
@@ -17,16 +16,16 @@ namespace BookingRoomAPI.Application.Service.Services
     {
         private readonly IMapper _mapper;
         private readonly IBookingRepository _bookingRepository;
-        private readonly IRoomRepository _roomRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IRoomService _roomservice;
+        private readonly IUserService _userService;
 
-        public BookingService(IMapper mapper, IBookingRepository bookingRepository, IRoomRepository roomRepository,
-            IUserRepository userRepository)
+        public BookingService(IMapper mapper, IBookingRepository bookingRepository, IRoomService roomservice,
+            IUserService userService)
         {
             _mapper = mapper;
             _bookingRepository = bookingRepository;
-            _roomRepository = roomRepository;
-            _userRepository = userRepository;
+            _roomservice = roomservice;
+            _userService = userService;
         }
 
         public async Task<bool> CheckAvailableAsync(DateTime firstDay, DateTime lastDay)
@@ -39,7 +38,7 @@ namespace BookingRoomAPI.Application.Service.Services
 
             if (!Utils.VerifyDateRange(firstDay, lastDay)) throw new ValidateExceptions("Invalid Range of Date");
 
-            var room = await _roomRepository.GetAvailableRoom(firstDay, lastDay);
+            var room = await _roomservice.GetAvailableRoom(firstDay, lastDay);
 
             return room == null ? false : true;
         }
@@ -53,10 +52,10 @@ namespace BookingRoomAPI.Application.Service.Services
             var booking = _mapper.Map<Booking>(bookingInputDto);
             var userDto = _mapper.Map<User>(bookingInputDto);
 
-            var room = await _roomRepository.GetAvailableRoom(bookingInputDto.CheckIn, bookingInputDto.CheckOut);
-            var user = await _userRepository.GetByEmail(bookingInputDto.Email);
+            var room = await _roomservice.GetAvailableRoom(bookingInputDto.CheckIn, bookingInputDto.CheckOut, null);
+            var user = await _userService.GetByEmail(bookingInputDto.Email);
 
-            booking.RoomId = room.Id;
+            booking.RoomId = new Guid(room.Id);
 
             if (user == null)
             {
@@ -64,7 +63,7 @@ namespace BookingRoomAPI.Application.Service.Services
             }
             else
             {
-                booking.UserId = user.Id;
+                booking.UserId = new Guid(user.Id);
             }
 
             booking.Status = BookingStatus.Booked;
@@ -74,8 +73,8 @@ namespace BookingRoomAPI.Application.Service.Services
 
             booking = await _bookingRepository.Add(booking);
 
-            booking.Room = room;
-            booking.User = user == null ? booking.User : user;
+            booking.Room = _mapper.Map<Room>(room);
+            booking.User = user == null ? booking.User : _mapper.Map<User>(user);
 
             return _mapper.Map<BookingOutputDto>(booking);
         }
@@ -90,9 +89,9 @@ namespace BookingRoomAPI.Application.Service.Services
 
             if (booking == null) throw new Exception("Booking does not found");
 
-            var room = await _roomRepository.GetAvailableRoom(booking.CheckIn, booking.CheckOut, booking.Code);
+            var room = await _roomservice.GetAvailableRoom(bookingInputDto.CheckIn, bookingInputDto.CheckOut, bookingInputDto.code);
 
-            booking.Room = room;
+            booking.RoomId = new Guid(room.Id);
             booking.CheckIn = bookingInputDto.CheckIn.Date;
             booking.CheckOut = bookingInputDto.CheckOut.Date.AddDays(1).AddSeconds(-1);
 

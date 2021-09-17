@@ -5,8 +5,6 @@ using BookingRoomAPI.Application.Service.Interfaces;
 using BookingRoomAPI.Domain.Interfaces;
 using BookingRoomAPI.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookingRoomAPI.Application.Service.Services
@@ -42,7 +40,7 @@ namespace BookingRoomAPI.Application.Service.Services
 
         public async Task<RoomOutputDto> GetAvailableRoom(DateTime checkIn, DateTime checkOut, string code)
         {
-            var room = await _roomRepository.GetAvailableRoom(checkIn, checkOut.AddDays(1).AddSeconds(-1), code);
+            var room = await _roomRepository.GetAvailableRoom(checkIn.Date, checkOut.Date.AddDays(1).AddSeconds(-1), code);
 
             if (room == null) throw new ValidateExceptions("Room Unavailable");
 

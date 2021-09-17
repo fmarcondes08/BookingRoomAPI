@@ -4,9 +4,7 @@ using BookingRoomAPI.Domain.Models.Enums;
 using BookingRoomAPI.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookingRoomAPI.Infrastructure.Repositories
@@ -26,7 +24,7 @@ namespace BookingRoomAPI.Infrastructure.Repositories
                         && checkIn.Date < y.CheckOut
                         && y.Status.Equals(BookingStatus.Booked)
                         && y.Active
-                        && (code == null ? true : y.Code == code) 
+                        && (code == null ? true : y.Code != code) 
                         ) == false);
         }
     }
